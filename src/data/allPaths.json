@@ -1,0 +1,27 @@
+{
+  "all_paths": [
+    {
+      "city": "london",
+      "id": "london-comic-con-winter",
+      "title": "London Comic Con Winter",
+      "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem",
+      "image": "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+    },
+
+    {
+      "id": "sf-blockchain-week",
+      "title": "SF Blockchain Week",
+      "city": "san-francisco",
+      "description": "corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate.",
+      "image": "https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+    },
+
+    {
+      "id": "the-halloween-house-party",
+      "title": "The Halloween House Party",
+      "city": "barcelona",
+      "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscisfa.",
+      "image": "https://images.unsplash.com/photo-1579282240050-352db0a14c21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=652&q=80"
+    }
+  ]
+}
