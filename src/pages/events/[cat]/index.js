@@ -3,53 +3,44 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Page = (props) => {
-  const [eventData, setEventData] = useState([]);
   const [disEvents, setDisEvents] = useState([]);
 
   useEffect(() => {
-    getData();
     filterData();
   }, []);
 
-  async function getData() {
-    const eventsInCity = await import("../../../data/data.json");
-    const allEvents = eventsInCity.allEvents;
-    setEventData(allEvents);
-  }
+  console.log("ssq", props.allEvents);
 
   function filterData() {
-    const selectedEvents = eventData?.filter((ev) => {
+    const selectedEvents = props.allEvents?.filter((ev) => {
       return ev.city === props.data[0].id;
     });
-    console.log("ssq", selectedEvents);
+
     setDisEvents(selectedEvents);
   }
 
-  console.log("selectedEvents", disEvents);
-  console.log("props.data.ids", eventData);
   return (
     <>
       <h1>{props.data[0].id} city</h1>
       <Image src={props.data[0].image} height={200} width={200} />
       <>
         <div>
-          {disEvents.length &&
-            disEvents?.map((dis) => {
-              return (
-                <>
-                  <div>
-                    <h1>-{dis?.title}</h1>{" "}
-                  </div>
-                  <Link
-                    href={`/events/${props.data[0].id}/${dis.id}`}
-                    id="events"
-                  >
-                    {" "}
-                    <div>{dis?.id}</div>
-                  </Link>
-                </>
-              );
-            })}
+          {disEvents.map((dis) => {
+            return (
+              <>
+                <div>
+                  <h1>-{dis?.title}</h1>{" "}
+                </div>
+                <Link
+                  href={`/events/${props.data[0].id}/${dis.id}`}
+                  id="events"
+                >
+                  {" "}
+                  <div>{dis?.id}</div>
+                </Link>
+              </>
+            );
+          })}
         </div>
       </>
     </>
@@ -87,8 +78,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const id = context?.params.cat;
   const { events_categories } = await import("../../../data/data.json");
+  const { allEvents } = await import("../../../data/data.json");
+
+  console.log("ae", allEvents);
 
   const data = events_categories.filter((ev) => ev.id === id);
 
-  return { props: { data, pageName: id } };
+  return { props: { data, pageName: id, allEvents } };
 }

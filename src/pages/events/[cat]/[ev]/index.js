@@ -1,9 +1,64 @@
 import Router, { useRouter } from "next/router";
+import { allEvents } from "../../../../data/data.json";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
-const Page = () => {
+const Page = (props) => {
   let router = useRouter();
+  const id = router.query.ev;
+  const [eventData, setEventData] = useState();
+  const [email, setEmail] = useState("");
   console.log("router", router.query.ev);
-  return <>{router.query.ev} page</>;
+  console.log("allEvents ", allEvents);
+
+  function eventFiler() {
+    const specificEvent = allEvents.filter((ae) => ae.id === id);
+    setEventData(specificEvent);
+  }
+
+  useEffect(() => {
+    eventFiler();
+  }, []);
+
+  async function submitHandler() {
+    try {
+      const resp = await fetch("/api/email-registration", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ email, eventId: id }),
+      });
+
+      if (!resp.status) throw new Error(resp.status);
+      const data = await resp.json();
+      console.log("res", resp);
+    } catch (err) {
+      console.log("err", err);
+    }
+  }
+  return (
+    <>
+      {router.query.ev} page
+      <div>
+        {eventData?.map((ev) => {
+          return (
+            <>
+              <div>{ev.title}</div>
+              <Image src={ev.image} height={100} width={100} />
+              <div>{ev.description}</div>
+              <input
+                type="text"
+                placeholder="enter email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button onClick={submitHandler}>submit</button>
+            </>
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 export default Page;
